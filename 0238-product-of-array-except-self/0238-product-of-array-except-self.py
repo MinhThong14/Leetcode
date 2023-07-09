@@ -1,16 +1,16 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        res = [1] * len(nums)
+        n = len(nums)
+        prefix, suffix = [1] * n, [1] * n
 
-        # count preffix product from left except the first one
-        for i in range(1, len(nums)):
-            res[i] = res[i-1] * nums[i-1]
+        for i in range(1, n):
+            prefix[i] = nums[i-1] * prefix[i-1]
         
+        for j in range(n-2, -1, -1):
+            suffix[j] = nums[j+1] * suffix[j+1]
+        
+        for w in range(n):
+            nums[w] = prefix[w] * suffix[w]
 
-        # count suffix product from right except the last one
-        suffix_prod = 1
-        for j in range(len(nums)-2, -1, -1):
-            suffix_prod *= nums[j+1]
-            res[j] *= suffix_prod
-        
-        return res
+        return nums
+
