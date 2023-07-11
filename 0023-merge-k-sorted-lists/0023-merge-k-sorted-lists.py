@@ -31,11 +31,9 @@ class Solution:
         if len(lists) == 1:
             return lists[0]
         
-        res = lists[0]
-        for i in range(1, len(lists)):
-            res = self.mergeTwoLists(res, lists[i])
-        
-        return res
+        mid = len(lists) // 2
+        l, r = self.mergeKLists(lists[:mid]), self.mergeKLists(lists[mid:])
+        return self.mergeTwoLists(l, r)
 
 
 
