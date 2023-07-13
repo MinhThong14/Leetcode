@@ -11,8 +11,7 @@ class Solution:
                 l += 1
                 continue
 
-            if len(sub_string) > max_length:
-                max_length = len(sub_string)
+            max_length = max(max_length, len(sub_string))
             r += 1
         
         return max_length
