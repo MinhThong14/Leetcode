@@ -24,7 +24,7 @@ class Trie:
                 return False
             current = current[w]
         
-        return True if '#' in current else False
+        return '#' in current
         
 
     def startsWith(self, prefix: str) -> bool:
