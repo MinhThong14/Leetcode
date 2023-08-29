@@ -42,10 +42,9 @@ class Trie:
             cur_node = cur_node[w]
             nodes.append((cur_node, w))
         
-
         if '#' in cur_node:
             p = '#'
-            for n, w, in nodes[::-1]:
+            for n, w in nodes[::-1]:
                 if p == '#' or len(n[p]) == 0:
                     del n[p]
                 p = w
