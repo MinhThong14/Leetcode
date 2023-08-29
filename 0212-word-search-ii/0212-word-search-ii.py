@@ -30,69 +30,65 @@ class Trie:
             if w not in current:
                 return False
             current = current[w]
-        
         return True
     
     def remove(self, word):
-        cur_node = self. child
-        nodes = []
-        for w in word:
-            if w not in cur_node:
-                return
-            cur_node = cur_node[w]
-            nodes.append((cur_node, w))
+        current = self.child
+        node = []
         
-        if '#' in cur_node:
+        for w in word:
+            if w not in current:
+                return
+            current = current[w]
+            node.append((current, w))
+        
+        if '#' in current:
             p = '#'
-            for n, w in nodes[::-1]:
-                if p == '#' or len(n[p]) == 0:
+            for n, w in node[::-1]:
+                if p == '#' or not len(n[p]):
                     del n[p]
                 p = w
 
-        
 
+    
 
 class Solution:
-    def adj(self, x, y, m, n):
-        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        adjacents = []
-        
-        for i, j in directions:
-            if 0 <= x + i < m and 0 <= y + j < n:
-                adjacents.append((x+i, y+j))
-        return adjacents
-    
-    def dfs(self, word, board, word_dict, x, y, m, n, res):
-        char, board[x][y] = board[x][y], '#'
-        
-        if word_dict.search(word):
-            res.add(word)
-            word_dict.remove(word)
-        
-        for i, j in self.adj(x, y, m, n):
-            if board[i][j] != '#':
-                new_word = word + board[i][j]
-                if word_dict.isPrefix(word):
-                    self.dfs(new_word, board, word_dict, i, j, m, n, res)
-        
-        board[x][y] = char
-        
-    
+
     
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        
-        word_dict = Trie()
-        res = set()
-             
-        for word in words:
-            word_dict.insert(word)
-        
-        
         m, n = len(board), len(board[0])
+        
+        trie = Trie()
+        res = set()
+        
+        for word in words:
+            trie.insert(word)
+        
+        def adj(x, y):
+            direcs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            
+            for i, j in direcs:
+                if 0 <= x+i < m and 0 <= y+j < n:
+                    yield(x+i, y+j)
+        
+        def dfs(word, x, y):
+            char, board[x][y] = board[x][y], '#'
+            
+            if trie.search(word):
+                res.add(word)
+                trie.remove(word)
+            
+            for i, j in adj(x, y):
+                if board[i][j] != '#':
+                    new_word = word + board[i][j]
+                    if trie.isPrefix(new_word):
+                        dfs(new_word, i, j)
+            board[x][y] = char
         
         for i in range(m):
             for j in range(n):
-                self.dfs(board[i][j], board, word_dict, i, j, m, n, res)
+                dfs(board[i][j], i, j)
+        
                 
         return res
 
