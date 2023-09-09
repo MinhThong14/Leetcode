@@ -6,8 +6,7 @@ class Solution:
             i = 1 & (n >> l)
             j = 1 & (n >> r)
             if i != j:
-                n ^= (1 << l)
-                n ^= (1 << r)
+                n ^= ((1 << l) | (1 << r))
             
             l -= 1
             r += 1
