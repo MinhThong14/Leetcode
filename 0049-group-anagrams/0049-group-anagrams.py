@@ -1,13 +1,16 @@
 class Solution:
-    def groupAnagrams(self, strs):
-        dict_t = collections.defaultdict(list)
-
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        anagrams = {}
+        
         for string in strs:
             count = [0] * 26
+            
             for c in string:
                 count[ord(c) - ord('a')] += 1
-            dict_t[tuple(count)].append(string)
+            
+            count = tuple(count)
+            if count not in anagrams:
+                anagrams[count] = []
+            anagrams[count].append(string)
         
-        return dict_t.values()
-                
-        
+        return anagrams.values()
