@@ -9,7 +9,10 @@ class Solution:
         res = []
         
         for key, value in freq.items():
-            heappush(heap, (-value, key))
+            heappush(heap, (value, key))
+            
+            if len(heap) > k:
+                heappop(heap)
             
         for _ in range(k):
             val, key = heappop(heap)
