@@ -16,9 +16,7 @@ class Solution:
             board[i][j] = word[0]
         
         return False
-            
-        
-        
+    
     
     def exist(self, board: List[List[str]], word: str) -> bool:
         m, n = len(board), len(board[0])
