@@ -3,7 +3,7 @@ class Solution:
         res = ""
         
         for i in range(len(s)):
-            l, r = i, i
+            l, r =  i, i
             
             while l >= 0 and r < len(s) and s[l] == s[r]:
                 l -= 1
@@ -11,23 +11,18 @@ class Solution:
             
             cur_str = s[l+1:r]
             
-            if i < len(s)-1:
+            if i < len(s)  - 1:
                 l1, r1 = i, i+1
-            
                 while l1 >= 0 and r1 < len(s) and s[l1] == s[r1]:
                     l1 -= 1
                     r1 += 1
-
+                
                 cur_str1 = s[l1+1:r1]
-
-
+                
                 if len(cur_str1) > len(cur_str):
                     cur_str = cur_str1
-
             
             if len(cur_str) > len(res):
                 res = cur_str
-            
         
         return res
-                
