@@ -2,7 +2,7 @@ class Solution:
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         intervals.append(newInterval)
         
-        intervals.sort(key=lambda v:v[0])
+        intervals.sort(key=lambda item:item[0])
         
         res = []
         
@@ -13,8 +13,7 @@ class Solution:
                 res.append([start, end])
                 start, end = intervals[i+1][0], intervals[i+1][1]
             elif end < intervals[i+1][1]:
-                end = intervals[i+1][1]                
-            
-        res.append([start, end])
+                end = intervals[i+1][1]
         
+        res.append([start, end])
         return res
