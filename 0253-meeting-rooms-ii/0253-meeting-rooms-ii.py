@@ -4,16 +4,21 @@ class Solution:
         if not intervals:
             return 0
         
-        free_rooms = []
+        used_rooms = 0
         
-        intervals.sort(key=lambda v:v[0])
+        start_timings = sorted([i[0] for i in intervals])
+        end_timings = sorted(i[1] for i in intervals)
+        L = len(intervals)
         
-        heapq.heappush(free_rooms, intervals[0][1])
+        end_pointer = 0
+        start_pointer = 0
         
-        for i in range(1, len(intervals)):
-            if free_rooms[0] <= intervals[i][0]:
-                heapq.heappop(free_rooms)
+        while start_pointer < L:
+            if start_timings[start_pointer] >= end_timings[end_pointer]:
+                used_rooms -=1
+                end_pointer += 1
             
-            heapq.heappush(free_rooms, intervals[i][1])
+            used_rooms += 1
+            start_pointer += 1
         
-        return len(free_rooms)
+        return used_rooms
