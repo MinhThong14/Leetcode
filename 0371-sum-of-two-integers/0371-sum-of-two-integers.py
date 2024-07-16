@@ -7,16 +7,16 @@ class Solution:
         
         sign = 1 if a > 0 else -1
         
-        if a * b >= 0:
-            while y:
+        if a * b > 0:
+            while y > 0:
                 answer = x ^ y
-                carry = (x&y) << 1
+                carry = (x & y) << 1
                 x, y = answer, carry
-        
         else:
-            while y:
+            while y > 0:
                 answer = x ^ y
                 borrow = ((~x) & y) << 1
                 x, y = answer, borrow
             
         return x * sign
+        
