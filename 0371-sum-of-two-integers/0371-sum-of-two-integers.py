@@ -12,11 +12,12 @@ class Solution:
                 answer = x ^ y
                 carry = (x & y) << 1
                 x, y = answer, carry
+        
         else:
             while y > 0:
                 answer = x ^ y
                 borrow = ((~x) & y) << 1
                 x, y = answer, borrow
-            
+        
         return x * sign
         
