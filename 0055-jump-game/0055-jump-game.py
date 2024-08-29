@@ -12,5 +12,4 @@ class Solution:
                 need_steps = 1
             else:
                 need_steps += 1
-        print(need_steps)
         return True if need_steps == 1 else False
