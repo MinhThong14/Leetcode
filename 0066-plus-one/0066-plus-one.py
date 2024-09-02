@@ -9,7 +9,6 @@ class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         
         self.reverse(digits)
-        print(digits)
         
         n = len(digits)
         
