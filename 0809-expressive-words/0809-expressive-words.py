@@ -14,8 +14,6 @@ class Solution:
         
         while l < m and i < n:
             if s[l] != word[i]:
-                # print(s[l])
-                # print(word[i])
                 return 0
             
             while r < m and s[l] == s[r]:
@@ -33,9 +31,6 @@ class Solution:
             l = r
             count = 0
             count_dup = 0
-            # print(count)
-            # print(count_dup)
-            # print()
             
                           
         return 1 if l == m and i == n else 0 
@@ -47,9 +42,5 @@ class Solution:
         for word in words:
             if self.validate_string(s, word) == 1:
                 num_words += 1
-            # print()
-            # print(num_words)
-            # print(word)
-            # print()
         
         return num_words
