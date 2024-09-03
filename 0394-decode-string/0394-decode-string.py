@@ -29,8 +29,6 @@ class Solution:
                 
             else:
                 stack.append(s[i])
-        print(stack)
-        
         res = ""
         
         while stack:
