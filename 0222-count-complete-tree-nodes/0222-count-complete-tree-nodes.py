@@ -6,23 +6,27 @@
 #         self.right = right
 
 from collections import deque
+
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
+        
         if not root:
             return 0
+        
+        count = 0
         
         queue = deque()
         
         queue.append(root)
-        count = 0
         
         while queue:
             cur_node = queue.popleft()
             count += 1
+            
             if cur_node.left:
                 queue.append(cur_node.left)
             
             if cur_node.right:
                 queue.append(cur_node.right)
-        
+            
         return count
