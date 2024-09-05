@@ -13,7 +13,7 @@ class Solution:
     class UnionFind:
         def __init__(self, n):
             self.parent = [-1] * n
-            self.count = (n)
+            self.count = n
         
         def _find(self, node):
             if self.parent[node] == -1:
