@@ -6,7 +6,7 @@ class Solution:
         
         l, r = 0, 0
         
-        ans = (float('-inf'), l, r)
+        ans = float('-inf')
         
         num_char = 0
         
@@ -29,12 +29,12 @@ class Solution:
                 
                 l += 1
                 
-            if r - l + 1 > ans[0]:
-                ans = (r-l+1, l, r)
+            if r - l + 1 > ans:
+                ans = r-l+1
                 
             r += 1
         
-        return ans[0]
+        return ans
                 
             
             
