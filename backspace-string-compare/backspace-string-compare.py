@@ -4,34 +4,28 @@ class Solution:
         s_stack = []
         t_stack = []
         
-        n = len(s)
+        m, n = len(s), len(t)
         
-        cur_s_indx = 0
-        while cur_s_indx < n:
-            idx = cur_s_indx
-            while idx < n and s[idx] == '#':
+        i, j = 0, 0
+        
+        while i < m:
+            while i < m and s[i] == '#':
                 if s_stack:
-                    s_stack.pop(-1)
-                idx += 1
-            if idx != cur_s_indx:
-                cur_s_indx = idx
-            else:
-                s_stack.append(s[cur_s_indx])
-                cur_s_indx += 1
+                    s_stack.pop()
+                i += 1
+            if i < m:
+                s_stack.append(s[i])
+            i += 1
         
-        cur_t_indx = 0
-        m = len(t)
-        while cur_t_indx < m:
-            idx = cur_t_indx
-            while idx < m and t[idx] == '#':
+        while j < n:
+            while j < n and t[j] == '#':
                 if t_stack:
-                    t_stack.pop(-1)
-                idx += 1
-            if idx != cur_t_indx:
-                cur_t_indx = idx
-            else:
-                t_stack.append(t[cur_t_indx])
-                cur_t_indx += 1
+                    t_stack.pop()
+                j += 1
+            
+            if j < n:
+                t_stack.append(t[j])
+            j += 1
         
         return s_stack == t_stack
         
