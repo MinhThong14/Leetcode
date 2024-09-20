@@ -4,14 +4,14 @@ class Solution:
         res = r
         
         def canSplit(mid):
-            count = 0
+            count = 1
             cur_sum = 0
             for i in range(len(nums)):
                 cur_sum += nums[i]
                 if cur_sum > mid:
                     cur_sum = nums[i]
                     count += 1
-            return count + 1 <= k
+            return count <= k
         
         while l <= r:
             mid = (r+l+1)//2
