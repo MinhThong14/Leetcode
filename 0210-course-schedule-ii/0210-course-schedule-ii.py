@@ -1,45 +1,58 @@
 from collections import defaultdict
 from collections import deque
 
+"""
+Ex1: [[1, 0]] -> 0-1
+Ex2: [[1,0], [2, 0], [3, 1], [3, 2]] -> 0-1-2-3
+
+1. Build graph
+2. Topological sort to find correct order
+    a. Creating indegree array
+    b. If indegree == 0 then add to queue
+    c. Pop node in queue then add to res
+    d. Traverse adjacent nodes of curnode, then decrease indegree value by 1
+    e. If indegree value == 0 then add to queue
+    f. Repeat the steps until queue is empty
+3. If len res == numCourses then return res, otherwise return empty array
+"""
+
 class Solution:
-    def topological_sort(self, n, graph):
+    def topologicalSort(self, n, graph):
         indegree = [0 for _ in range(n)]
         
-        for i in range(n):
-            for vertex in graph[i]:
-                indegree[vertex] += 1
+        for values in graph.values():
+            for value in values:
+                indegree[value] += 1
         
         queue = deque()
-        for j in range(n):
-            if indegree[j] == 0:
-                queue.append(j)
-                
+        
+        for i in range(n):
+            if indegree[i] == 0:
+                queue.append(i)
+        
+        visited = [0 for _ in range(n)]
+        
         res = []
-
+        
         while queue:
-            cur_vertex = queue.popleft()
-            res.append(cur_vertex)
+            cur_node = queue.popleft()
+            res.append(cur_node)
+            visited[cur_node] = 1
             
-            for vertex in graph[cur_vertex]:
-                indegree[vertex] -= 1
-                if indegree[vertex] == 0:
-                    queue.append(vertex)
+            for neighboor in graph[cur_node]:
+                indegree[neighboor] -= 1
+                if not visited[neighboor] and indegree[neighboor] == 0:
+                    queue.append(neighboor)
         
-        return res
-        
+        return res if len(res) == n else []
             
-    
+            
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        n = len(prerequisites)
-        if numCourses == 1:
-            return [0]
-        
         graph = defaultdict(list)
         
         for a, b in prerequisites:
             graph[b].append(a)
+            
+        return self.topologicalSort(numCourses, graph)
         
-        result = self.topological_sort(numCourses,graph)
-         
-        return result if len(result) == numCourses else []
         
