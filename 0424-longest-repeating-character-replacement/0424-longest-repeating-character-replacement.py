@@ -53,32 +53,43 @@ class Solution:
 #          create pointers
         l, r = 0, 0
 #     create hashset
-        hashset = {}
-        hashset[s[l]] = 1
+        hashset = defaultdict(int)
+        # hashset[s[l]] = 1
         
         n = len(s)
         
         res = float('-inf')
         
-        while l < n and r < n:
+#         while l < n and r < n:
+#             cur_len = r - l + 1
+            
+#             cur_max_value = max(hashset.values())
+            
+#             if cur_len - cur_max_value <= k:
+#                 res = max(res, cur_len)
+#                 r += 1
+#                 if r < n:
+#                     hashset[s[r]] += 1
+#             else:
+#                 if l < n:
+#                     hashset[s[l]] -= 1
+#                 l += 1
+
+        for r in range(n):
             cur_len = r - l + 1
+            hashset[s[r]] += 1
             
             cur_max_value = max(hashset.values())
             
             if cur_len - cur_max_value <= k:
-                if cur_len > res:
-                    res = cur_len
-                r += 1
-                if r < n:
-                    if s[r] in hashset:
-                        hashset[s[r]] += 1
-                    else:
-                        hashset[s[r]] = 1
-            else:
-                if l < n:
-                    hashset[s[l]] -= 1
+                res = max(res, cur_len)
+            
+            while cur_len - cur_max_value > k:
+                hashset[s[l]] -= 1
                 l += 1
-        
+                cur_len = r - l + 1
+                cur_max_value = max(hashset.values())
+            
         return res
             
             
