@@ -8,25 +8,47 @@
 from collections import deque
 
 class Solution:
+        
+    def compute_depth(self, root):
+        d = 0
+        while root.left:
+            root = root.left
+            d += 1
+        
+        return d
+    
+    def exists(self, indx, d, node):
+        l, r = 0, 2**d - 1
+        
+        for _ in range(d):
+            mid = l + (r-l) // 2
+            if indx <= mid:
+                node = node.left
+                r = mid
+            else:
+                node = node.right
+                l = mid + 1
+        
+        return node is not None
+        
     def countNodes(self, root: Optional[TreeNode]) -> int:
         
         if not root:
             return 0
         
-        queue = deque()
-        queue.append(root)
+        d = self.compute_depth(root)
+        if d == 0:
+            return 1
         
-        count = 1
+        l, r = 1, 2**d-1
         
-        while queue:
-            cur_node = queue.popleft()
+        while l <= r:
+            mid = l + (r - l) // 2
             
-            if cur_node.left:
-                count += 1
-                queue.append(cur_node.left)
-            
-            if cur_node.right:
-                count += 1
-                queue.append(cur_node.right)
+            if self.exists(mid, d, root):
+                l = mid + 1
+            else:
+                r = mid - 1
         
-        return count
+        return (2**d-1) + l
+        
