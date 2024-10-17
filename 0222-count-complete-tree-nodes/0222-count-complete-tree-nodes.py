@@ -43,7 +43,7 @@ class Solution:
         l, r = 1, 2**d-1
         
         while l <= r:
-            mid = l + (r - l) // 2
+            mid = (r + l + 1) // 2
             
             if self.exists(mid, d, root):
                 l = mid + 1
