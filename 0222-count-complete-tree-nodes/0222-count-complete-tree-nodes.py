@@ -40,7 +40,7 @@ class Solution:
         if d == 0:
             return 1
         
-        l, r = 1, 2**d-1
+        l, r = 0, 2**d-1
         
         while l <= r:
             mid = (r + l + 1) // 2
