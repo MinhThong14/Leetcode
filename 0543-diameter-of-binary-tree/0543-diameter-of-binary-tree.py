@@ -14,7 +14,7 @@ class Solution:
         
         self.result = max(self.result, left + 1 + right)
         
-        return max(left + 1, right + 1)
+        return max(left, right) + 1
     
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         self.result = 0
