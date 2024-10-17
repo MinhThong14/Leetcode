@@ -13,20 +13,20 @@ class Solution:
         if not root:
             return 0
         
-        count = 0
-        
         queue = deque()
-        
         queue.append(root)
+        
+        count = 1
         
         while queue:
             cur_node = queue.popleft()
-            count += 1
             
             if cur_node.left:
+                count += 1
                 queue.append(cur_node.left)
             
             if cur_node.right:
+                count += 1
                 queue.append(cur_node.right)
-            
+        
         return count
