@@ -21,10 +21,10 @@ class Solution:
         l, r = 0, 2**d - 1
         
         for _ in range(d):
-            mid = l + (r-l) // 2
-            if indx <= mid:
+            mid = (r + l + 1) // 2
+            if indx < mid:
                 node = node.left
-                r = mid
+                r = mid - 1
             else:
                 node = node.right
                 l = mid + 1
