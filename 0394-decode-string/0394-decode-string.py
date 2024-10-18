@@ -12,15 +12,14 @@ class Solution:
                 
                 while stack[-1] != '[':
                     decodedString.append(stack.pop())
-                
+                    
                 stack.pop()
                 base = 1
                 k = 0
                 
-                while len(stack) != 0 and stack[-1].isnumeric():
+                while stack and stack[-1].isnumeric():
                     k += int(stack.pop()) * base
                     base *= 10
-                
                 
                 while k != 0:
                     for j in range(len(decodedString)-1, -1, -1):
@@ -29,11 +28,8 @@ class Solution:
                 
             else:
                 stack.append(s[i])
-        res = ""
         
-        while stack:
-            res = stack.pop() + res
-        
-        return res
+        return ''.join(stack)
+                
                 
                     
